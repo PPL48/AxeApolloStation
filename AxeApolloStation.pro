@@ -52,4 +52,9 @@ HEADERS  += mainwindow.h \
     Controllers/parkingcontroller.h
 
 FORMS    += mainwindow.ui \
-    Views/frmlogin.ui
+    Views/frmlogin.ui \
+    Views/chooseaviator_dialog.ui \
+    Views/choosecrew_dialog.ui \
+    Views/manageflight_dialog.ui \
+    Views/checkin1_dialog.ui \
+    Views/checkin2_dialog.ui
