@@ -29,8 +29,13 @@ SOURCES += main.cpp\
     Models/bandaramodel.cpp \
     Models/bagasimodel.cpp \
     viewfactory.cpp \
-    Views/frmlogin.cpp \
-    Controllers/parkingcontroller.cpp
+    Controllers/parkingcontroller.cpp \
+    frmmanageflight.cpp \
+    frmlogin.cpp \
+    frmchoosecrew.cpp \
+    frmchooseaviator.cpp \
+    frmcheckin2.cpp \
+    frmcheckin1.cpp
 
 HEADERS  += mainwindow.h \
     Includes/pesawat.h \
@@ -48,13 +53,18 @@ HEADERS  += mainwindow.h \
     Models/bandaramodel.h \
     Models/bagasimodel.h \
     viewfactory.h \
-    Views/frmlogin.h \
-    Controllers/parkingcontroller.h
+    Controllers/parkingcontroller.h \
+    frmmanageflight.h \
+    frmlogin.h \
+    frmchoosecrew.h \
+    frmchooseaviator.h \
+    frmcheckin2.h \
+    frmcheckin1.h
 
 FORMS    += mainwindow.ui \
-    Views/frmlogin.ui \
-    Views/chooseaviator_dialog.ui \
-    Views/choosecrew_dialog.ui \
-    Views/manageflight_dialog.ui \
-    Views/checkin1_dialog.ui \
-    Views/checkin2_dialog.ui
+    frmmanageflight.ui \
+    frmlogin.ui \
+    frmchoosecrew.ui \
+    frmchooseaviator.ui \
+    frmcheckin2.ui \
+    frmcheckin1.ui

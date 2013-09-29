@@ -1,16 +1,16 @@
 #include "viewfactory.h"
 
 ViewFactory* ViewFactory::_instance = NULL;
-MainWindow* ViewFactory::w = NULL;
+MainWindow* ViewFactory::window = NULL;
 
 ViewFactory::ViewFactory()
 {
 }
 
-ViewFactory* ViewFactory::createInstance(MainWindow *a) {
+ViewFactory* ViewFactory::createInstance(MainWindow *w) {
     if (!_instance) {
         _instance = new ViewFactory();
-        w = a;
+        window = w;
     }
     return _instance;
 }
@@ -20,5 +20,22 @@ ViewFactory* ViewFactory::instance() {
 }
 
 void ViewFactory::start() {
-    w->show();
+    window->show();
+}
+
+void ViewFactory::changeUI(ViewType view) {
+    switch (view) {
+    case vwLogin:
+        break;
+    case vwCheckIn1:
+        break;
+    case vwCheckIn2:
+        break;
+    case vwChooseAviator:
+        break;
+    case vwChooseCrew:
+        break;
+    case vwManageFlight:
+        break;
+    }
 }
