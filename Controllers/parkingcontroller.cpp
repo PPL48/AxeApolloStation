@@ -1,5 +1,14 @@
-#include "parkingcontroller.h"
+#include "ParkingController.h"
+#include "ui_parkingcontroller.h"
 
-ParkingController::ParkingController()
+ParkingController::ParkingController(QWidget *parent) :
+    QMainWindow(parent),
+    ui(new Ui::ParkingController)
 {
+    ui->setupUi(this);
+}
+
+ParkingController::~ParkingController()
+{
+    delete ui;
 }

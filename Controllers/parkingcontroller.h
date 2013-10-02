@@ -1,10 +1,22 @@
 #ifndef PARKINGCONTROLLER_H
 #define PARKINGCONTROLLER_H
 
-class ParkingController
+#include <QMainWindow>
+
+namespace Ui {
+class ParkingController;
+}
+
+class ParkingController : public QMainWindow
 {
+    Q_OBJECT
+    
 public:
-    ParkingController();
+    explicit ParkingController(QWidget *parent = 0);
+    ~ParkingController();
+    
+private:
+    Ui::ParkingController *ui;
 };
 
 #endif // PARKINGCONTROLLER_H

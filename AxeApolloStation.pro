@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -12,8 +12,7 @@ TARGET = AxeApolloStation
 TEMPLATE = app
 
 
-SOURCES += main.cpp\
-        mainwindow.cpp \
+SOURCES +=\
     Includes/pesawat.cpp \
     Includes/penumpang.cpp \
     Includes/penerbangan.cpp \
@@ -29,15 +28,15 @@ SOURCES += main.cpp\
     Models/bandaramodel.cpp \
     Models/bagasimodel.cpp \
     viewfactory.cpp \
-    Controllers/parkingcontroller.cpp \
-    frmmanageflight.cpp \
-    frmlogin.cpp \
-    frmchoosecrew.cpp \
-    frmchooseaviator.cpp \
-    frmcheckin2.cpp \
-    frmcheckin1.cpp
+    main.cpp \
+    Controllers/ParkingController.cpp \
+    Controllers/FlightController.cpp \
+    Controllers/CheckInController.cpp \
+    Controllers/LoginController.cpp \
+    Views/dlgchooseaviator.cpp \
+    Views/dlgchoosecrew.cpp
 
-HEADERS  += mainwindow.h \
+HEADERS  += \
     Includes/pesawat.h \
     Includes/penumpang.h \
     Includes/penerbangan.h \
@@ -53,18 +52,17 @@ HEADERS  += mainwindow.h \
     Models/bandaramodel.h \
     Models/bagasimodel.h \
     viewfactory.h \
-    Controllers/parkingcontroller.h \
-    frmmanageflight.h \
-    frmlogin.h \
-    frmchoosecrew.h \
-    frmchooseaviator.h \
-    frmcheckin2.h \
-    frmcheckin1.h
+    Controllers/CheckInController.h \
+    Controllers/FlightController.h \
+    Controllers/ParkingController.h \
+    Controllers/LoginController.h \
+    Views/dlgchooseaviator.h \
+    Views/dlgchoosecrew.h
 
-FORMS    += mainwindow.ui \
-    frmmanageflight.ui \
-    frmlogin.ui \
-    frmchoosecrew.ui \
-    frmchooseaviator.ui \
-    frmcheckin2.ui \
-    frmcheckin1.ui
+FORMS    += \
+    Views/parkingcontroller.ui \
+    Views/checkincontroller.ui \
+    Views/flightcontroller.ui \
+    Views/logincontroller.ui \
+    Views/dlgchooseaviator.ui \
+    Views/dlgchoosecrew.ui
