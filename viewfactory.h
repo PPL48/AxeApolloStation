@@ -1,32 +1,44 @@
 #ifndef VIEWFACTORY_H
 #define VIEWFACTORY_H
 
-#include "mainwindow.h"
+#include <QMainWindow>
+
+#include "Controllers/LoginController.h"
+#include "Controllers/CheckInController.h"
+#include "Controllers/FlightController.h"
+#include "Controllers/ParkingController.h"
 
 enum ViewType {
     vwLogin,
-    vwCheckIn1,
-    vwCheckIn2,
-    vwChooseAviator,
-    vwChooseCrew,
-    vwManageFlight
+    vwCheckIn,
+    vwParking,
+    vwFlight
 };
 
-class ViewFactory
+class ViewFactory : public QWidget
 {
 public:
 
-    static ViewFactory* createInstance(MainWindow *mainWindow);
+    static ViewFactory* createInstance();
 	static ViewFactory* instance();
     static void start();
 
-    static void changeUI(ViewType view);
+public slots:
+    static void swapUI(ViewType view);
+
+private slots:
+    void on_rbShowPass_toggled(bool checked);
 
 private:
 	ViewFactory();
 
-    static MainWindow *window;
+    static QMainWindow *window;
     static ViewFactory* _instance;
+
+    static LoginController   *m_Login;
+    static CheckInController *m_CheckIn;
+    static FlightController  *m_Flight;
+    static ParkingController *m_Parking;
 };
 
 #endif // VIEWFACTORY_H

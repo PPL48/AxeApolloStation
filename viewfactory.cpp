@@ -1,16 +1,26 @@
 #include "viewfactory.h"
 
 ViewFactory* ViewFactory::_instance = NULL;
-MainWindow* ViewFactory::window = NULL;
+QMainWindow* ViewFactory::window = NULL;
+
+LoginController*   ViewFactory::m_Login   = NULL;
+CheckInController* ViewFactory::m_CheckIn = NULL;
+ParkingController* ViewFactory::m_Parking = NULL;
+FlightController*  ViewFactory::m_Flight  = NULL;
 
 ViewFactory::ViewFactory()
 {
 }
 
-ViewFactory* ViewFactory::createInstance(MainWindow *w) {
+ViewFactory* ViewFactory::createInstance() {
     if (!_instance) {
-        _instance = new ViewFactory();
-        window = w;
+        _instance   = new ViewFactory;
+        m_Login     = new LoginController(_instance);
+        m_CheckIn   = new CheckInController(_instance);
+        m_Parking   = new ParkingController(_instance);
+        m_Flight    = new FlightController(_instance);
+
+        window      = m_Login;
     }
     return _instance;
 }
@@ -23,19 +33,28 @@ void ViewFactory::start() {
     window->show();
 }
 
-void ViewFactory::changeUI(ViewType view) {
+void ViewFactory::swapUI(ViewType view) {
+    m_Login->hide();
+    m_CheckIn->hide();
+    m_Parking->hide();
+    m_Flight->hide();
+
     switch (view) {
     case vwLogin:
+        m_Login->show();
+        window = m_Login;
         break;
-    case vwCheckIn1:
+    case vwCheckIn:
+        m_CheckIn->show();
+        window = m_CheckIn;
         break;
-    case vwCheckIn2:
+    case vwParking:
+        m_Parking->show();
+        window = m_Parking;
         break;
-    case vwChooseAviator:
-        break;
-    case vwChooseCrew:
-        break;
-    case vwManageFlight:
+    case vwFlight:
+        m_Flight->show();
+        window = m_Flight;
         break;
     }
 }
