@@ -1,5 +1,8 @@
 #include "pesawat.h"
 
-Pesawat::Pesawat()
+Pesawat::Pesawat(qint32 a, QString b, qint32 c)
 {
+    id = a;
+    nama = b;
+    total_kursi = c;
 }

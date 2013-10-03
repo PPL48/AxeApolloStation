@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui sql
+QT       += core gui sql network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -34,7 +34,9 @@ SOURCES +=\
     Controllers/CheckInController.cpp \
     Controllers/LoginController.cpp \
     Views/dlgchooseaviator.cpp \
-    Views/dlgchoosecrew.cpp
+    Views/dlgchoosecrew.cpp \
+    Models/dbconfig.cpp \
+    dbfactory.cpp
 
 HEADERS  += \
     Includes/pesawat.h \
@@ -57,7 +59,9 @@ HEADERS  += \
     Controllers/ParkingController.h \
     Controllers/LoginController.h \
     Views/dlgchooseaviator.h \
-    Views/dlgchoosecrew.h
+    Views/dlgchoosecrew.h \
+    Models/dbconfig.h \
+    dbfactory.h
 
 FORMS    += \
     Views/parkingcontroller.ui \
@@ -66,3 +70,6 @@ FORMS    += \
     Views/logincontroller.ui \
     Views/dlgchooseaviator.ui \
     Views/dlgchoosecrew.ui
+
+RESOURCES += \
+    Resources/systems.qrc

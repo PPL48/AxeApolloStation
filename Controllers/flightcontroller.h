@@ -22,6 +22,8 @@ private slots:
 
     void on_btnLogout_clicked();
 
+    void on_btnCreate_clicked();
+
 private:
     Ui::FlightController *ui;
 };
