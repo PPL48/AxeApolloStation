@@ -14,6 +14,16 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true">#centralwidget{
+	
+	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1,  stop:0 	rgb(1, 18, 71), stop:0.5 rgb(0, 58, 120), stop:1 rgb(1, 18, 71));
+}
+
+#centralwidget QLabel{
+	color: white;
+}</string>
+   </property>
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
      <widget class="QFrame" name="frame">
@@ -59,15 +69,30 @@
     </item>
     <item>
      <widget class="QTabWidget" name="FlightManager">
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
       <property name="currentIndex">
        <number>0</number>
       </property>
       <widget class="QWidget" name="tabWelcome">
+       <property name="styleSheet">
+        <string notr="true">#tabWelcome{
+	border: 3px solid white;
+	background: rgb(2, 61, 116);
+}</string>
+       </property>
        <attribute name="title">
         <string>Welcome</string>
        </attribute>
       </widget>
       <widget class="QWidget" name="tabList">
+       <property name="styleSheet">
+        <string notr="true">#tabList{
+	border: 3px solid white;
+	background: rgb(2, 61, 116);
+}</string>
+       </property>
        <attribute name="title">
         <string>Show List</string>
        </attribute>
@@ -153,45 +178,6 @@
          <string>&lt;date&gt;</string>
         </property>
        </widget>
-       <widget class="QLabel" name="lbDetailDepart">
-        <property name="geometry">
-         <rect>
-          <x>320</x>
-          <y>290</y>
-          <width>81</width>
-          <height>16</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>&lt;Departure&gt;</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label_11">
-        <property name="geometry">
-         <rect>
-          <x>430</x>
-          <y>290</y>
-          <width>46</width>
-          <height>13</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>to</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="lbDetailArrive">
-        <property name="geometry">
-         <rect>
-          <x>500</x>
-          <y>290</y>
-          <width>91</width>
-          <height>16</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>&lt;Arrival&gt;</string>
-        </property>
-       </widget>
        <widget class="QLabel" name="label_12">
         <property name="geometry">
          <rect>
@@ -205,8 +191,47 @@
          <string>&lt;AirPlane&gt;</string>
         </property>
        </widget>
+       <widget class="QWidget" name="horizontalLayoutWidget">
+        <property name="geometry">
+         <rect>
+          <x>320</x>
+          <y>290</y>
+          <width>291</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_7">
+         <item>
+          <widget class="QLabel" name="lbDetailDepart">
+           <property name="text">
+            <string>&lt;Departure&gt;</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_11">
+           <property name="text">
+            <string>to</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="lbDetailArrive">
+           <property name="text">
+            <string>&lt;Arrival&gt;</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
       </widget>
       <widget class="QWidget" name="tabScheduling">
+       <property name="styleSheet">
+        <string notr="true">#tabScheduling{
+	border: 3px solid white;
+	background: rgb(2, 61, 116);
+}</string>
+       </property>
        <attribute name="title">
         <string>Scheduling</string>
        </attribute>
