@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 
+#include "Includes/pegawai.h"
+
 namespace Ui {
 class FlightController;
 }
@@ -17,15 +19,15 @@ public:
     
 private slots:
     void on_btnAviAdd_clicked();
-
     void on_btnAviRemove_clicked();
-
     void on_btnLogout_clicked();
-
     void on_btnCreate_clicked();
 
 private:
     Ui::FlightController *ui;
+
+private slots:
+    void on_return_index(Pegawai);
 };
 
 #endif // FLIGHTCONTROLLER_H

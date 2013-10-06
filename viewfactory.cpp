@@ -8,6 +8,7 @@ CheckInController* ViewFactory::m_CheckIn = NULL;
 ParkingController* ViewFactory::m_Parking = NULL;
 FlightController*  ViewFactory::m_Flight  = NULL;
 
+
 ViewFactory::ViewFactory()
 {
 }

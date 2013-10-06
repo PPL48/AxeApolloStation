@@ -7,15 +7,18 @@
 class Pegawai
 {
 public:
-    Pegawai(qint32 id, QString nama, qint32 kode_job);
+    Pegawai(qint32 id, QString nama, QString kode_job);
 
     QVariant toVariant();
     QString  toString();
 
+    QString  getID();
+    QString  getNama();
+
 private:
     qint32  id;
     QString nama;
-    qint32  kode_job;
+    QString  kode_job;
 };
 
 #endif // PEGAWAI_H

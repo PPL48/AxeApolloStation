@@ -1,14 +1,14 @@
 #include "dlgchoosecrew.h"
 #include "ui_dlgchoosecrew.h"
 
-dlgChooseCrew::dlgChooseCrew(QWidget *parent) :
+DlgChooseCrew::DlgChooseCrew(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::dlgChooseCrew)
+    ui(new Ui::DlgChooseCrew)
 {
     ui->setupUi(this);
 }
 
-dlgChooseCrew::~dlgChooseCrew()
+DlgChooseCrew::~DlgChooseCrew()
 {
     delete ui;
 }

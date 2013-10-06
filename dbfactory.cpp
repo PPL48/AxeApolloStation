@@ -49,14 +49,14 @@ DbFactory* DbFactory::instance() {
 
 BagasiModel*      DbFactory::getBagasiModel() {
     if (!m_Bagasi) {
-        m_Bagasi = new BagasiModel(_instance, QSqlDatabase::database("ErlanggaIS"));
+        m_Bagasi = new BagasiModel(_instance);
     }
     return m_Bagasi;
 }
 
 BandaraModel*     DbFactory::getBandaraModel() {
     if (!m_Bandara) {
-        m_Bandara = new BandaraModel(_instance, QSqlDatabase::database("ErlanggaIS"));
+        m_Bandara = new BandaraModel(_instance);
     }
     return m_Bandara;
 }

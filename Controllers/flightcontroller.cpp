@@ -9,6 +9,11 @@
 #include "Models/penerbanganmodel.h"
 #include "Models/pesawatmodel.h"
 
+#include "Views/dlgchooseaviator.h"
+#include "Views/dlgchoosecrew.h"
+
+#include <QListWidgetItem>
+
 FlightController::FlightController(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::FlightController)
@@ -32,7 +37,10 @@ FlightController::~FlightController()
 
 void FlightController::on_btnAviAdd_clicked()
 {
+    DlgChooseAviator *avi = new DlgChooseAviator(this);
+    connect(avi, SIGNAL(choose_aviator(Pegawai)), this, SLOT(on_return_index(Pegawai)));
 
+    avi->show();
 }
 
 void FlightController::on_btnAviRemove_clicked()
@@ -54,4 +62,8 @@ void FlightController::on_btnLogout_clicked()
 void FlightController::on_btnCreate_clicked()
 {
 
+}
+
+void FlightController::on_return_index(Pegawai pgw) {
+    ui->lvAviatorList->addItem(pgw.toString());
 }

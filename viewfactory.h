@@ -12,7 +12,7 @@ enum ViewType {
     vwLogin,
     vwCheckIn,
     vwParking,
-    vwFlight
+    vwFlight,
 };
 
 class ViewFactory : public QWidget
@@ -25,6 +25,7 @@ public:
 
 public slots:
     static void swapUI(ViewType view);
+    static void spawnDialog(ViewType view);
 
 private slots:
     void on_rbShowPass_toggled(bool checked);

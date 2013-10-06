@@ -4,19 +4,19 @@
 #include <QDialog>
 
 namespace Ui {
-class dlgChooseCrew;
+class DlgChooseCrew;
 }
 
-class dlgChooseCrew : public QDialog
+class DlgChooseCrew : public QDialog
 {
     Q_OBJECT
     
 public:
-    explicit dlgChooseCrew(QWidget *parent = 0);
-    ~dlgChooseCrew();
+    explicit DlgChooseCrew(QWidget *parent = 0);
+    ~DlgChooseCrew();
     
 private:
-    Ui::dlgChooseCrew *ui;
+    Ui::DlgChooseCrew *ui;
 };
 
 #endif // DLGCHOOSECREW_H
