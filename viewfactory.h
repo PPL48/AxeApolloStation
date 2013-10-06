@@ -30,7 +30,7 @@ private slots:
     void on_rbShowPass_toggled(bool checked);
 
 private:
-	ViewFactory();
+    ViewFactory();
 
     static QMainWindow *window;
     static ViewFactory* _instance;

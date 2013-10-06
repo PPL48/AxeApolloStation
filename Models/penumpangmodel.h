@@ -6,20 +6,17 @@
 
 #include "Includes/penumpang.h"
 
-class PenumpangModel : public QSqlTableModel
+class PenumpangModel : public QSqlQueryModel
 {
 public:
     PenumpangModel(QObject* parent);
 
-    Qt::ItemFlags flags (const QModelIndex &index) const;
-    QVariant data (const QModelIndex &idx, int role = Qt::DisplayRole) const;
-    int rowCount (const QModelIndex &parent = QModelIndex()) const;
-
     //-- operation
-private:
-    QList<Penumpang> m_Values;
-    bool             m_Valid;
-    QTime            m_CacheValidity;
+    QList<Penumpang>  getAllPenumpang();
+    QList<Penumpang>  getPenumpangBy(QString criteria);
+    bool              insertPenumpang(Penumpang penumpang);
+    bool              updatePenumpang(int index, Penumpang penumpang);
+    bool              refreshList();
 };
 
 #endif // PENUMPANGMODEL_H

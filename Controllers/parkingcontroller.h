@@ -14,7 +14,13 @@ class ParkingController : public QMainWindow
 public:
     explicit ParkingController(QWidget *parent = 0);
     ~ParkingController();
+
+    //--
+    void calculateParking();
     
+private slots:
+    void on_btnLogout_clicked();
+
 private:
     Ui::ParkingController *ui;
 };

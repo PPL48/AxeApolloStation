@@ -6,21 +6,20 @@
 
 #include "Includes/bandara.h"
 
-class BandaraModel : public QSqlTableModel
+class BandaraModel : public QSqlQueryModel
 {
+    void fetch();
+
 public:
     BandaraModel(QObject* parent);
 
-    Qt::ItemFlags flags (const QModelIndex &index) const;
-    QVariant data (const QModelIndex &idx, int role = Qt::DisplayRole) const;
-    int rowCount (const QModelIndex &parent = QModelIndex()) const;
-
     //-- operation
+    QList<Bandara>  getAllBandara();
+    QList<Bandara>  getBandaraBy(QString criteria);
+    bool            insertBandara(Bandara bandara);
+    bool            updateBandara(int index, Bandara bandara);
+    bool            refreshList();
 
-private:
-    QList<Bandara>  m_Values;
-    bool            m_Valid;
-    QTime           m_CacheValidity;
 };
 
 #endif // BANDARAMODEL_H

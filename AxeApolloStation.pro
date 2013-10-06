@@ -11,7 +11,6 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = AxeApolloStation
 TEMPLATE = app
 
-
 SOURCES +=\
     Includes/pesawat.cpp \
     Includes/penumpang.cpp \
@@ -36,7 +35,9 @@ SOURCES +=\
     Views/dlgchooseaviator.cpp \
     Views/dlgchoosecrew.cpp \
     Models/dbconfig.cpp \
-    dbfactory.cpp
+    dbfactory.cpp \
+    Models/pemesananmodel.cpp \
+    Includes/pemesanan.cpp
 
 HEADERS  += \
     Includes/pesawat.h \
@@ -61,7 +62,9 @@ HEADERS  += \
     Views/dlgchooseaviator.h \
     Views/dlgchoosecrew.h \
     Models/dbconfig.h \
-    dbfactory.h
+    dbfactory.h \
+    Models/pemesananmodel.h \
+    Includes/pemesanan.h
 
 FORMS    += \
     Views/parkingcontroller.ui \

@@ -6,20 +6,17 @@
 
 #include "Includes/pesawat.h"
 
-class PesawatModel : public QSqlTableModel
+class PesawatModel : public QSqlQueryModel
 {
 public:
     PesawatModel(QObject* parent);
 
-    Qt::ItemFlags flags (const QModelIndex &index) const;
-    QVariant data (const QModelIndex &idx, int role = Qt::DisplayRole) const;
-    int rowCount (const QModelIndex &parent = QModelIndex()) const;
-
     //-- operation
-private:
-    QList<Pesawat>  m_Values;
-    bool            m_Valid;
-    QTime           m_CacheValidity;
+    QList<Pesawat>  getAllPesawat();
+    QList<Pesawat>  getPesawatBy(QString criteria);
+    bool            insertPesawat(Pesawat pesawat);
+    bool            updatePesawat(int index, Pesawat pesawat);
+    bool            refreshList();
 };
 
 #endif // PESAWATMODEL_H

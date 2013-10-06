@@ -2,7 +2,7 @@
 #include "ui_flightcontroller.h"
 
 #include "viewfactory.h"
-
+#include "dbfactory.h"
 
 #include "Models/bandaramodel.h"
 #include "Models/pegawaimodel.h"
@@ -14,6 +14,15 @@ FlightController::FlightController(QWidget *parent) :
     ui(new Ui::FlightController)
 {
     ui->setupUi(this);
+
+    //-- Get Pesawat
+    QList<Pesawat> pesawat = DbFactory::getPesawatModel()->getAllPesawat();
+
+    foreach (Pesawat pswt, pesawat) {
+        ui->cbPesawat->addItem(pswt.toString());
+    }
+
+    //QList<Bandara> bandara = DbFactory::getBandaraModel()->getAllBandara();
 }
 
 FlightController::~FlightController()

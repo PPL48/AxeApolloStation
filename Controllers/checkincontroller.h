@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 
+#include "Includes/pemesan.h"
+
 namespace Ui {
 class CheckInController;
 }
@@ -14,6 +16,10 @@ class CheckInController : public QMainWindow
 public:
     explicit CheckInController(QWidget *parent = 0);
     ~CheckInController();
+
+    //--
+    Pemesan searchPemesanBy(QString criteria);
+    bool    createPemesan(Pemesan pemesan);
     
 private slots:
     void on_btnLogout_clicked();
