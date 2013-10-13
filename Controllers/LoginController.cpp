@@ -2,6 +2,8 @@
 #include "ui_logincontroller.h"
 
 #include "viewfactory.h"
+#include <QTextStream>
+#include <QMessageBox>
 
 LoginController::LoginController(QWidget *parent) :
     QMainWindow(parent),
@@ -17,12 +19,17 @@ LoginController::LoginController(QWidget *parent) :
 
 void LoginController::check_credentials() {
     // Get Controller instance
+    QTextStream out(stdout);
+    QString username = this->ui->edUsername->text();
+    out << username + "\n";
+    QString password = this->ui->edPassword->text();
+    out << password + "\n";
 
     // Query
 
     // Get result
 
-    if (true) {
+    if (username.compare("timo")==0 && password.compare("timooenjoe")==0) {
         ViewType vt;
         switch (ui->cbRole->currentIndex()) {
         case 0:
@@ -37,6 +44,8 @@ void LoginController::check_credentials() {
         }
 
         ViewFactory::swapUI(vt);
+    } else {
+        QMessageBox::warning(this,tr("Invalid Input"),tr("Wrong username or password!"),QMessageBox::Ok);
     }
 }
 
