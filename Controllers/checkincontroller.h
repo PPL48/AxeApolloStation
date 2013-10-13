@@ -23,6 +23,7 @@ public:
     
 private slots:
     void on_btnLogout_clicked();
+    void on_btnSearch_clicked();
 
 private:
     Ui::CheckInController *ui;

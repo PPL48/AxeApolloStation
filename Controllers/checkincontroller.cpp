@@ -25,3 +25,13 @@ void CheckInController::on_btnLogout_clicked()
     if (true)
         ViewFactory::swapUI(vwLogin);
 }
+
+void CheckInController::on_btnSearch_clicked()
+{
+    //-- Save all credentials
+
+    //-- Clear
+
+    //-- back to login form
+
+}

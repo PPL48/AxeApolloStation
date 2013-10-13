@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
     //-- Read the configuration
 
     //-- Create models
-    DbConfig dbconf("127.0.0.1", "erlangga", "erlanggaIS", "erlanggadb");
+    DbConfig dbconf("127.0.0.1", "erlangga", "erlanggaIS", "aasa");
     DbFactory::createInstance(dbconf);
 
     //-- Create views
