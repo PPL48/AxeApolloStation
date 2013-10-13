@@ -37,7 +37,7 @@ void CheckInController::on_btnSearch_clicked(){
     QString resNum = ui->resNum->text();
     QString idCardNum = ui->idCardNum->text();
 
-    QList<Pemesan> pemesan = DbFactory::getPemesanModel()->getPemesanBy("id_pemesanan="+        );
+    QList<Pemesan> pemesan = DbFactory::getPemesanModel()->getPemesanBy("id_pemesanan=");
     if(pemesan.length()!=1){
         pemesan.clear();
         pemesan = DbFactory::getPemesanModel()->getPemesanBy("id="+idCardNum);

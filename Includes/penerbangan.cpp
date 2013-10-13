@@ -10,3 +10,8 @@ Penerbangan::Penerbangan(qint32 a, QString b, QString c, QString d, qint32 e, qi
     id_bandara_tujuan = f;
     id_pesawat = g;
 }
+
+
+QString Penerbangan::toString() {
+
+}

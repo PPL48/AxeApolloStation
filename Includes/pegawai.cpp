@@ -18,3 +18,7 @@ QString Pegawai::getID() {
 QString Pegawai::getNama() {
     return nama;
 }
+
+QString Pegawai::getJob() {
+    return kode_job;
+}

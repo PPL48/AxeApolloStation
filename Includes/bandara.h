@@ -7,7 +7,7 @@
 class Bandara
 {
 public:
-    Bandara(qint32 id, QString nama, qint32 kode, qint32 biaya);
+    Bandara(qint32 id, QString nama, QString kode, qint32 biaya);
 
     QVariant toVariant();
     QString  toString();
@@ -15,7 +15,7 @@ public:
 private:
     qint32  id;
     QString nama;
-    qint32  kode;
+    QString  kode;
     qint32  biaya;
 };
 

@@ -2,7 +2,6 @@
 #include "ui_dlgchooseaviator.h"
 
 #include "dbfactory.h"
-#include "Includes/pegawai.h"
 
 DlgChooseAviator::DlgChooseAviator(QWidget *parent) :
     QDialog(parent),
@@ -36,4 +35,12 @@ void DlgChooseAviator::on_buttons_accepted()
 
     emit choose_aviator(pgw);
     this->hide();
+
+    QObject::deleteLater();
+}
+
+void DlgChooseAviator::on_buttons_rejected()
+{
+    this->hide();
+    QObject::deleteLater();
 }

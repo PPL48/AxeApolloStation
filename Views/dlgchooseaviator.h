@@ -26,6 +26,7 @@ private:
 private slots:
     void print_aviator(int index);
     void on_buttons_accepted();
+    void on_buttons_rejected();
 };
 
 #endif // DLGCHOOSEAVIATOR_H

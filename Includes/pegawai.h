@@ -14,6 +14,7 @@ public:
 
     QString  getID();
     QString  getNama();
+    QString  getJob();
 
 private:
     qint32  id;
