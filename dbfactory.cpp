@@ -31,12 +31,11 @@ DbFactory* DbFactory::createInstance(const DbConfig &config) {
         if (!login.open())
             QMessageBox::critical(0, "Database error", "Credentials not load");
 
-        QSqlDatabase erlangga = QSqlDatabase::addDatabase("QMYSQL", "ErlanggaIS");
+        QSqlDatabase erlangga = QSqlDatabase::addDatabase("QMYSQL");
         erlangga.setHostName(m_Config->getHost());
         erlangga.setUserName(m_Config->getUser());
         erlangga.setPassword(m_Config->getPass());
         erlangga.setDatabaseName(m_Config->getDbName());
-
         if (!erlangga.open())
             QMessageBox::critical(0, "Database error", "Cannot load database");
     }

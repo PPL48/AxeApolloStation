@@ -29,7 +29,7 @@ void LoginController::check_credentials() {
 
     // Get result
 
-    if (username.compare("timo")==0 && password.compare("timooenjoe")==0) {
+   // if (username.compare("timo")==0 && password.compare("timooenjoe")==0) {
         ViewType vt;
         switch (ui->cbRole->currentIndex()) {
         case 0:
@@ -42,11 +42,11 @@ void LoginController::check_credentials() {
             vt = vwParking;
             break;
         }
-
+        //diclear dulu mestinya
         ViewFactory::swapUI(vt);
-    } else {
-        QMessageBox::warning(this,tr("Invalid Input"),tr("Wrong username or password!"),QMessageBox::Ok);
-    }
+   // } else {
+     //   QMessageBox::warning(this,tr("Invalid Input"),tr("Wrong username or password!"),QMessageBox::Ok);
+    //}
 }
 
 LoginController::~LoginController()

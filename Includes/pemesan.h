@@ -13,7 +13,7 @@ public:
     QVariant toVariant();
     QString  toString();
 
-private:
+//private:
     qint32  id;
     qint32  id_pemesanan;
     QString nama;
