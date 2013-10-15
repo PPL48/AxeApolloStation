@@ -11,8 +11,10 @@ DlgChooseAviator::DlgChooseAviator(QWidget *parent) :
 
     m_Pegawai = DbFactory::instance()->getPegawaiModel()->getPegawaiBy("kode_job='PILOT'");
 
-    foreach (Pegawai pgw, m_Pegawai) {
-        ui->lvAviator->addItem(pgw.toString());
+    if (m_Pegawai.length() > 0) {
+        foreach (Pegawai pgw, m_Pegawai) {
+            ui->lvAviator->addItem(pgw.toString());
+        }
     }
     connect(ui->lvAviator, SIGNAL(currentRowChanged(int)), this, SLOT(print_aviator(int)));
 }

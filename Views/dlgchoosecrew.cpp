@@ -11,8 +11,10 @@ DlgChooseCrew::DlgChooseCrew(QWidget *parent) :
 
     m_Pegawai = DbFactory::instance()->getPegawaiModel()->getPegawaiBy("kode_job='CABIN'");
 
-    foreach (Pegawai pgw, m_Pegawai) {
-        ui->lvCrew->addItem(pgw.toString());
+    if (m_Pegawai.length() > 0) {
+        foreach (Pegawai pgw, m_Pegawai) {
+            ui->lvCrew->addItem(pgw.toString());
+        }
     }
     connect(ui->lvCrew, SIGNAL(currentRowChanged(int)), this, SLOT(print_crew(int)));
 }

@@ -22,16 +22,18 @@ FlightController::FlightController(QWidget *parent) :
 
     //-- Get Pesawat
     QList<Pesawat> pesawat = DbFactory::getPesawatModel()->getAllPesawat();
-    foreach (Pesawat pswt, pesawat) {
-        ui->cbPesawat->addItem(pswt.toString());
-    }
+    if (pesawat.length() > 0)
+        foreach (Pesawat pswt, pesawat) {
+            ui->cbPesawat->addItem(pswt.toString());
+        }
 
     //-- Get Bandara
     QList<Bandara> bandara = DbFactory::getBandaraModel()->getAllBandara();
-    foreach (Bandara bdr, bandara) {
-        ui->cbBandaraBerangkat->addItem(bdr.toString());
-        ui->cbBandaraDatang->addItem(bdr.toString());
-    }
+    if (pesawat.length() > 0)
+        foreach (Bandara bdr, bandara) {
+            ui->cbBandaraBerangkat->addItem(bdr.toString());
+            ui->cbBandaraDatang->addItem(bdr.toString());
+        }
 
     //-- Get Penerbangan
     on_btnRefresh_clicked();
@@ -98,6 +100,11 @@ void FlightController::on_btnLogout_clicked()
 
 void FlightController::on_btnCreate_clicked()
 {
+    if (m_Aviator.length() == 0 || m_Crew.length() == 0) {
+        QMessageBox::critical(this,"NullNo empty value allowed", "Silahkan isi bagian yang kosong terlebih dahulu.");
+        return;
+    }
+
     //-- Building process
     PenerbanganModel *model = DbFactory::getPenerbanganModel();
     int idxFrom  = ui->cbBandaraBerangkat->currentIndex();
@@ -176,8 +183,12 @@ void FlightController::on_btnRefresh_clicked()
     m_Penerbangan = DbFactory::getPenerbanganModel()->getAllPenerbangan();
 
     // Build the Penerbangan
-    foreach(Penerbangan penerbangan, m_Penerbangan) {
-        ui->lvPenerbangan->addItem(penerbangan.toString());
+    if (m_Penerbangan.length() > 0) {
+        foreach(Penerbangan penerbangan, m_Penerbangan) {
+            ui->lvPenerbangan->addItem(penerbangan.toString());
+        }
+    } else {
+        return;
     }
 
     // Get the Penerbangan and list of pegawai on it
@@ -194,19 +205,21 @@ void FlightController::on_btnRefresh_clicked()
     QList<int> idxAvi = AviMap.keys();
     QList<int> idxCrw = CrwMap.keys();
 
-    QList<Pegawai> dummy;
+    if (keys.length() > 0 && idxAvi.length() > 0 && idxCrw.length() > 0) {
+        QList<Pegawai> dummy;
 
-    foreach (int key, keys) {
-        QList<int> pgwList = PnbPgwMap.value(key);
+        foreach (int key, keys) {
+            QList<int> pgwList = PnbPgwMap.value(key);
 
-        m_AviatorShow.insert(key,dummy);
-        m_CrewShow.insert(key, dummy);
+            m_AviatorShow.insert(key,dummy);
+            m_CrewShow.insert(key, dummy);
 
-        foreach(int idx, pgwList) {
-            if (idxAvi.indexOf(idx)>=0) {
-                m_AviatorShow[key].append(AviMap[idx]);
-            } else if (idxCrw.indexOf(idx)>=0) {
-                m_CrewShow[key].append(CrwMap[idx]);
+            foreach(int idx, pgwList) {
+                if (idxAvi.indexOf(idx)>=0) {
+                    m_AviatorShow[key].append(AviMap[idx]);
+                } else if (idxCrw.indexOf(idx)>=0) {
+                    m_CrewShow[key].append(CrwMap[idx]);
+                }
             }
         }
     }
