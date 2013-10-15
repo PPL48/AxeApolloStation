@@ -250,14 +250,14 @@ QList<Penerbangan> PenerbanganModel::getPenerbangan(int day, int month, int year
         int length = rowCount();
         //out << "query length: " + QString::number(length) + "\n";
         for(int i=0; i<length; ++i) {
-            out << record(i).value("id").toString() + "__";
-            out << record(i).value("kode_penerbangan").toString() + "__";
-            out << record(i).value("jam_berangkat").toString() + "__";
-            out << record(i).value("jam_tiba").toString() + "__";
-            out << record(i).value("tanggal").toString() + "__";
-            out << record(i).value("bandara_asal_id").toString() + "__";
-            out << record(i).value("bandara_tujuan_id").toString() + "__";
-            out << record(i).value("pesawat_id").toString() + "__\n";
+            //out << record(i).value("id").toString() + "__";
+            //out << record(i).value("kode_penerbangan").toString() + "__";
+            //out << record(i).value("jam_berangkat").toString() + "__";
+            //out << record(i).value("jam_tiba").toString() + "__";
+            //out << record(i).value("tanggal").toString() + "__";
+            //out << record(i).value("bandara_asal_id").toString() + "__";
+            //out << record(i).value("bandara_tujuan_id").toString() + "__";
+            //out << record(i).value("pesawat_id").toString() + "__\n";
             Penerbangan pbgn(record(i).value("id").toInt(),
                              record(i).value("jam_berangkat").toString(),
                              record(i).value("jam_tiba").toString(),
@@ -265,7 +265,7 @@ QList<Penerbangan> PenerbanganModel::getPenerbangan(int day, int month, int year
                              record(i).value("bandara_asal_id").toInt(),
                              record(i).value("bandara_tujuan_id").toInt(),
                              record(i).value("pesawat_id").toInt(),
-                             record(i).value("kode_penerbangan").toString());
+                             "", "", "");
 
             retVal.push_back(pbgn);
         }

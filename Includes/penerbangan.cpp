@@ -56,10 +56,6 @@ QString Penerbangan::getPesawat() {
 QString Penerbangan::getTanggal(){
     return tanggal;
 }
-QString Penerbangan::getKode_penerbangan(){
-    return kode_penerbangan;
-}
-
 QString Penerbangan::getJam_berangkat(){
     return jam_berangkat;
 }

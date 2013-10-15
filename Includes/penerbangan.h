@@ -7,6 +7,7 @@
 class Penerbangan
 {
 public:
+    Penerbangan();
     Penerbangan(qint32  id, QString jam_berangkat, QString jam_tiba, QString tanggal,
         qint32  id_bandara_asal, qint32  id_bandara_tujuan, qint32  id_pesawat,
         QString bandara_asal, QString bandara_tujuan, QString pesawat);
@@ -22,13 +23,10 @@ public:
 	
 	//--
 	QString getTanggal();
-    QString getKode_penerbangan();
     QString getJam_tiba();
     QString getJam_berangkat();
     int getPesawat_id();
     int getBandara_asal_id();
-    QVariant toVariant();
-    QString  toString();
 
 private:
     qint32  id;
