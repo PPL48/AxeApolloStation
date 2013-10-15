@@ -19,6 +19,16 @@ public:
     QString getAirportDepart();
     QString getAirportArrival();
     QString getPesawat();
+	
+	//--
+	QString getTanggal();
+    QString getKode_penerbangan();
+    QString getJam_tiba();
+    QString getJam_berangkat();
+    int getPesawat_id();
+    int getBandara_asal_id();
+    QVariant toVariant();
+    QString  toString();
 
 private:
     qint32  id;
@@ -28,7 +38,13 @@ private:
     qint32  id_bandara_asal;
     qint32  id_bandara_tujuan;
     qint32  id_pesawat;
-
+	
+	//--    
+	qint32  bandara_asal_id;
+    qint32  bandara_tujuan_id;
+    qint32  pesawat_id;
+	//--
+	
     QString bandara_asal;
     QString bandara_tujuan;
     QString pesawat;

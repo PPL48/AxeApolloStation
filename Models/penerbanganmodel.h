@@ -21,7 +21,14 @@ public:
     void                createPenerbangan();
     bool                updatePenerbangan(int index, Penerbangan penerbangan);
     bool                refreshList();
-
+	
+	//--for parking
+	QList<Penerbangan>  getPenerbangan(int day, int month, int year);
+    QString             getPesawatById(int id);
+    QString             getBandaraById(int id);
+    int                 getTarifParkirBandaraById(int id);
+	//--
+	
     QMap<int, QList<int> >  getPenerbanganPegawaiMap();
 
     //-- for building
