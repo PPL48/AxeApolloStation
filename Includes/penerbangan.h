@@ -7,6 +7,7 @@
 class Penerbangan
 {
 public:
+    Penerbangan();
     Penerbangan(qint32  id, QString jam_berangkat, QString jam_tiba, QString tanggal,
         qint32  id_bandara_asal, qint32  id_bandara_tujuan, qint32  id_pesawat,
         QString bandara_asal, QString bandara_tujuan, QString pesawat);
@@ -19,6 +20,13 @@ public:
     QString getAirportDepart();
     QString getAirportArrival();
     QString getPesawat();
+	
+	//--
+	QString getTanggal();
+    QString getJam_tiba();
+    QString getJam_berangkat();
+    int getPesawat_id();
+    int getBandara_asal_id();
 
 private:
     qint32  id;
@@ -28,7 +36,13 @@ private:
     qint32  id_bandara_asal;
     qint32  id_bandara_tujuan;
     qint32  id_pesawat;
-
+	
+	//--    
+	qint32  bandara_asal_id;
+    qint32  bandara_tujuan_id;
+    qint32  pesawat_id;
+	//--
+	
     QString bandara_asal;
     QString bandara_tujuan;
     QString pesawat;
