@@ -11,9 +11,9 @@ public:
               qint32 is_checkin, QString no_kursi);
 
     QVariant toVariant();
-    QString  toString();
+    QString  toString() const;
 
-private:
+//private:
     qint32  id;
     qint32  id_pemesanan;
     QString titel;

@@ -18,6 +18,7 @@ public:
     //-- operation
     QList<Penerbangan>  getAllPenerbangan();
     QList<Penerbangan>  getPenerbanganBy(QString criteria);
+	QList<Penerbangan>  getPenerbanganBy2(QString criteria);
     void                createPenerbangan();
     bool                updatePenerbangan(int index, Penerbangan penerbangan);
     bool                refreshList();

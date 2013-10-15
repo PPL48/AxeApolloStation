@@ -28,7 +28,7 @@ public:
     int getPesawat_id();
     int getBandara_asal_id();
 
-private:
+//private:
     qint32  id;
     QString jam_berangkat;
     QString jam_tiba;
