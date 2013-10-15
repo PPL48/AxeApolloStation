@@ -22,20 +22,19 @@ FlightController::FlightController(QWidget *parent) :
 
     //-- Get Pesawat
     QList<Pesawat> pesawat = DbFactory::getPesawatModel()->getAllPesawat();
-
     foreach (Pesawat pswt, pesawat) {
         ui->cbPesawat->addItem(pswt.toString());
     }
 
     //-- Get Bandara
     QList<Bandara> bandara = DbFactory::getBandaraModel()->getAllBandara();
-
     foreach (Bandara bdr, bandara) {
         ui->cbBandaraBerangkat->addItem(bdr.toString());
         ui->cbBandaraDatang->addItem(bdr.toString());
     }
 
     //-- Get Penerbangan
+    on_btnRefresh_clicked();
 
     // Reset all the buffer;
 }
@@ -47,7 +46,7 @@ FlightController::~FlightController()
 
 void FlightController::on_btnAviAdd_clicked()
 {
-    if (m_Aviator.size() < 2) {
+    if (m_Aviator.size() < 2) {     // Pilot + Copilot
         DlgChooseAviator *avi = new DlgChooseAviator(this);
         connect(avi, SIGNAL(choose_aviator(Pegawai)), this, SLOT(return_index(Pegawai)));
 
@@ -60,15 +59,11 @@ void FlightController::on_btnAviAdd_clicked()
 
 void FlightController::on_btnCrewAdd_clicked()
 {
-    if (m_Crew.size() < 2) {
-        DlgChooseCrew *crew = new DlgChooseCrew(this);
-        connect(crew, SIGNAL(choose_crew(Pegawai)),this, SLOT(return_index(Pegawai)));
+    DlgChooseCrew *crew = new DlgChooseCrew(this);
+    connect(crew, SIGNAL(choose_crew(Pegawai)),this, SLOT(return_index(Pegawai)));
 
-        crew->setModal(true);
-        crew->show();
-    } else {
-        QMessageBox::critical(this,"Illegal Policy", "Hanya dua awak kabin yang diperbolehkan.");
-    }
+    crew->setModal(true);
+    crew->show();
 }
 
 
@@ -103,20 +98,61 @@ void FlightController::on_btnLogout_clicked()
 
 void FlightController::on_btnCreate_clicked()
 {
+    //-- Building process
+    PenerbanganModel *model = DbFactory::getPenerbanganModel();
+    int idxFrom  = ui->cbBandaraBerangkat->currentIndex();
+    int idxTo    = ui->cbBandaraDatang->currentIndex();
+    int idxPlane = ui->cbPesawat->currentIndex();
 
+    model->addJam(ui->teJamBerangkat->text(), true);
+    model->addJam(ui->teJamDatang->text(), false);
+
+    model->addTanggal(ui->deDate->text());
+
+    foreach (Pegawai pgw, m_Aviator)
+        model->addAviator(pgw);
+
+    foreach (Pegawai pgw, m_Crew)
+        model->addCrew(pgw);
+
+    model->addBandara(DbFactory::getBandaraModel()->getCache(idxFrom),true);
+    model->addBandara(DbFactory::getBandaraModel()->getCache(idxTo), false);
+
+    model->addPesawat(DbFactory::getPesawatModel()->getCache(idxPlane));
+
+    //-- Let the model build it and get the result
+    model->createPenerbangan();
+
+    //-- Update the list
+    on_btnRefresh_clicked();
+
+    //-- Clear the data
+    ui->lvAviatorList->clear();
+    ui->lvCrewList->clear();
+    m_Aviator.clear();
+    m_Crew.clear();
+
+    //-- Let user know
+    QMessageBox::information(this,"Success!","Penambahan jadwal sukses dilakukan");
 }
 
-void FlightController::on_return_index(Pegawai pgw) {
+void FlightController::return_index(Pegawai pgw) {
     if (pgw.getJob() == "PILOT") {
-        ui->lvAviatorList->addItem(pgw.toString());
-        m_Aviator.append(pgw);
-
+        if (m_Aviator.indexOf(pgw) < 0) {
+            ui->lvAviatorList->addItem(pgw.toString());
+            m_Aviator.append(pgw);
+        } else {
+            QMessageBox::critical(this, "Data sama!", "Anda memasukkan nama yang telah terdaftar sebelumnya");
+        }
     } else if (pgw.getJob() == "CABIN") {
-        ui->lvCrewList->addItem(pgw.toString());
-        m_Crew.append(pgw);
+        if (m_Crew.indexOf(pgw) < 0) {
+            ui->lvCrewList->addItem(pgw.toString());
+            m_Crew.append(pgw);
+        } else {
+            QMessageBox::critical(this, "Data sama!", "Anda memasukkan nama yang telah terdaftar sebelumnya");
+        }
     }
 }
-
 
 void FlightController::on_btnClear_clicked()
 {
@@ -125,4 +161,83 @@ void FlightController::on_btnClear_clicked()
 
     m_Aviator.clear();
     m_Crew.clear();
+}
+
+void FlightController::on_btnRefresh_clicked()
+{
+    m_AviatorShow.clear();
+    m_CrewShow.clear();
+    m_Penerbangan.clear();
+    ui->lvAviatorShow->clear();
+    ui->lvCrewShow->clear();
+    ui->lvPenerbangan->clear();
+
+    // Get Penerbangan list
+    m_Penerbangan = DbFactory::getPenerbanganModel()->getAllPenerbangan();
+
+    // Build the Penerbangan
+    foreach(Penerbangan penerbangan, m_Penerbangan) {
+        ui->lvPenerbangan->addItem(penerbangan.toString());
+    }
+
+    // Get the Penerbangan and list of pegawai on it
+    QMap<int, QList<int> > PnbPgwMap = DbFactory::getPenerbanganModel()->getPenerbanganPegawaiMap();
+
+    // Get list of Aviator, mapped by their ID
+    QMap<int, Pegawai> AviMap = DbFactory::getPegawaiModel()->getAviatorMappedID();
+
+    // Get list of Crew, mapped by their ID
+    QMap<int, Pegawai> CrwMap = DbFactory::getPegawaiModel()->getCrewMappedID();
+
+    // Build the list
+    QList<int> keys = PnbPgwMap.keys();
+    QList<int> idxAvi = AviMap.keys();
+    QList<int> idxCrw = CrwMap.keys();
+
+    QList<Pegawai> dummy;
+
+    foreach (int key, keys) {
+        QList<int> pgwList = PnbPgwMap.value(key);
+
+        m_AviatorShow.insert(key,dummy);
+        m_CrewShow.insert(key, dummy);
+
+        foreach(int idx, pgwList) {
+            if (idxAvi.indexOf(idx)>=0) {
+                m_AviatorShow[key].append(AviMap[idx]);
+            } else if (idxCrw.indexOf(idx)>=0) {
+                m_CrewShow[key].append(CrwMap[idx]);
+            }
+        }
+    }
+}
+
+void FlightController::on_lvPenerbangan_clicked(const QModelIndex &index)
+{
+    // Get the index of Penerbangan
+    int idx = index.row();
+    Penerbangan pnb = m_Penerbangan.at(idx);
+    int pnbIdx = pnb.getID();
+
+    // update the list
+    ui->lvAviatorShow->clear();
+    ui->lvCrewShow->clear();
+
+    foreach(Pegawai pgw, m_AviatorShow[pnbIdx]) {
+        ui->lvAviatorShow->addItem(pgw.toString());
+    }
+    foreach(Pegawai pgw, m_CrewShow[pnbIdx]) {
+        ui->lvCrewShow->addItem(pgw.toString());
+    }
+
+    // update the labels
+    ui->lbDateShow->setText(pnb.getDate());
+    ui->lbDetailDepart->setText(pnb.getAirportDepart());
+    ui->lbDetailArrive->setText(pnb.getAirportArrival());
+    ui->lbPesawatShow->setText(pnb.getPesawat());
+}
+
+void FlightController::on_FlightManager_currentChanged(int index)
+{
+
 }

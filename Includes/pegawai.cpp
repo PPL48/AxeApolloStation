@@ -1,5 +1,11 @@
 #include "pegawai.h"
 
+Pegawai::Pegawai() {
+    id = 0;
+    nama = "";
+    kode_job = "";
+}
+
 Pegawai::Pegawai(qint32 a, QString b, QString c)
 {
     id = a;
@@ -7,12 +13,12 @@ Pegawai::Pegawai(qint32 a, QString b, QString c)
     kode_job = c;
 }
 
-QString Pegawai::toString() {
+QString Pegawai::toString() const {
     return nama;
 }
 
-QString Pegawai::getID() {
-    return QString("%1").arg(id);
+int Pegawai::getID() {
+    return id;
 }
 
 QString Pegawai::getNama() {
@@ -22,3 +28,21 @@ QString Pegawai::getNama() {
 QString Pegawai::getJob() {
     return kode_job;
 }
+
+bool Pegawai::operator==(const Pegawai& pegawai) {
+    return (id==pegawai.id)&&(nama==pegawai.nama)&&(kode_job==pegawai.kode_job);
+}
+
+Pegawai& Pegawai::operator=(const Pegawai& pegawai) {
+    id=pegawai.id;
+    nama=pegawai.nama;
+    kode_job=pegawai.kode_job;
+
+    return *this;
+}
+/*
+QDebug operator<<(QDebug d, const Pegawai& pgw) {
+    d << pgw.toString();
+    return d;
+}
+*/

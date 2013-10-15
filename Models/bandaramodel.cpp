@@ -18,11 +18,11 @@ QList<Bandara> BandaraModel::getAllBandara() {
         retVal.clear();
 
         for (int i=0; i<length; ++i) {
-            Bandara pegawai(record(i).value("id").toInt(),
+            Bandara bandara(record(i).value("id").toInt(),
                         record(i).value("nama").toString(),
                         record(i).value("kode").toString(),
                         record(i).value("biaya").toInt());
-            retVal.push_back(pegawai);
+            retVal.push_back(bandara);
         }
     }
     return retVal;
@@ -30,4 +30,11 @@ QList<Bandara> BandaraModel::getAllBandara() {
 
 QList<Bandara> BandaraModel::getBandaraBy(QString criteria) {
 
+}
+
+Bandara BandaraModel::getCache(int index) {
+    return Bandara(record(index).value("id").toInt(),
+                   record(index).value("nama").toString(),
+                   record(index).value("kode").toString(),
+                   record(index).value("biaya").toInt());
 }

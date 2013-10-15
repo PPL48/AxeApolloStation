@@ -7,10 +7,16 @@
 class Pesawat
 {
 public:
+    Pesawat();
     Pesawat(qint32 id, QString nama, qint32 total_kursi);
+    void set(qint32 id, QString nama, qint32 total_kursi);
+    void set(const Pesawat& pesawat);
 
-    QVariant toVariant();
     QString  toString();
+
+    int      getID();
+    QString  getNama();
+    int      getKursi();
 
 private:
     qint32  id;

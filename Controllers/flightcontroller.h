@@ -3,8 +3,8 @@
 
 #include <QMainWindow>
 
-#include <QList>
 #include "Includes/pegawai.h"
+#include "Includes/penerbangan.h"
 
 namespace Ui {
 class FlightController;
@@ -28,12 +28,19 @@ private slots:
     void return_index(Pegawai);
 
     void on_btnClear_clicked();
+    void on_btnRefresh_clicked();
+    void on_FlightManager_currentChanged(int index);
+    void on_lvPenerbangan_clicked(const QModelIndex &index);
 
 private:
     Ui::FlightController *ui;
 
-    QList<Pegawai> m_Aviator;
-    QList<Pegawai> m_Crew;
+    QList<Pegawai>     m_Aviator;
+    QList<Pegawai>     m_Crew;
+
+    QList<Penerbangan>            m_Penerbangan;
+    QMap< int, QList<Pegawai> >   m_AviatorShow;    // <id_penerbangan, list of pegawai>
+    QMap< int, QList<Pegawai> >   m_CrewShow;
 };
 
 #endif // FLIGHTCONTROLLER_H

@@ -11,8 +11,8 @@ public:
            qint32 id_penumpang, qint32 berat,
            qint32 charge);
 
-    QVariant toVariant();
     QString  toString();
+
 private:
     qint32      id;
     QString     kode_bagasi;

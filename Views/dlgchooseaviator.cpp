@@ -20,7 +20,7 @@ DlgChooseAviator::DlgChooseAviator(QWidget *parent) :
 void DlgChooseAviator::print_aviator(int index) {
     Pegawai pgw = m_Pegawai.at(index);
 
-    ui->lbIDNumber->setText(pgw.getID());
+    ui->lbIDNumber->setText(QString::number(pgw.getID()));
     ui->lbName->setText(pgw.getNama());
 }
 

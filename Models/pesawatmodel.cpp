@@ -27,3 +27,9 @@ QList<Pesawat> PesawatModel::getAllPesawat() {
 
     return retVal;
 }
+
+Pesawat PesawatModel::getCache(int index) {
+    return Pesawat(record(index).value("id").toInt(),
+                   record(index).value("nama").toString(),
+                   record(index).value("total_kursi").toInt());
+}

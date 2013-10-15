@@ -17,6 +17,9 @@ public:
     bool            insertPegawai(Pegawai pegawai);
     bool            updatePegawai(int index, Pegawai pegawai);
     bool            refreshList();
+
+    QMap<int, Pegawai> getAviatorMappedID();
+    QMap<int, Pegawai> getCrewMappedID();
 };
 
 #endif // PEGAWAIMODEL_H

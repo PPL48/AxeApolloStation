@@ -16,6 +16,7 @@ public:
     //-- operation
     QList<Bandara>  getAllBandara();
     QList<Bandara>  getBandaraBy(QString criteria);
+    Bandara         getCache(int index);
     bool            insertBandara(Bandara bandara);
     bool            updateBandara(int index, Bandara bandara);
     bool            refreshList();

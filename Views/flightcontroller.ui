@@ -96,13 +96,13 @@
        <attribute name="title">
         <string>Show List</string>
        </attribute>
-       <widget class="QListView" name="lvPenerbangan">
+       <widget class="QListWidget" name="lvPenerbangan">
         <property name="geometry">
          <rect>
           <x>10</x>
           <y>30</y>
           <width>291</width>
-          <height>351</height>
+          <height>321</height>
          </rect>
         </property>
        </widget>
@@ -145,7 +145,7 @@
          <string>Crew</string>
         </property>
        </widget>
-       <widget class="QListView" name="lvAviatorShow">
+       <widget class="QListWidget" name="lvAviatorShow">
         <property name="geometry">
          <rect>
           <x>320</x>
@@ -155,7 +155,7 @@
          </rect>
         </property>
        </widget>
-       <widget class="QListView" name="lvCrewShow">
+       <widget class="QListWidget" name="lvCrewShow">
         <property name="geometry">
          <rect>
           <x>320</x>
@@ -169,7 +169,7 @@
         <property name="geometry">
          <rect>
           <x>320</x>
-          <y>270</y>
+          <y>260</y>
           <width>46</width>
           <height>13</height>
          </rect>
@@ -182,47 +182,66 @@
         <property name="geometry">
          <rect>
           <x>320</x>
-          <y>320</y>
-          <width>46</width>
-          <height>13</height>
+          <y>350</y>
+          <width>291</width>
+          <height>16</height>
          </rect>
         </property>
         <property name="text">
          <string>&lt;AirPlane&gt;</string>
         </property>
        </widget>
-       <widget class="QWidget" name="horizontalLayoutWidget">
+       <widget class="QLabel" name="lbDetailArrive">
         <property name="geometry">
          <rect>
           <x>320</x>
-          <y>290</y>
+          <y>320</y>
           <width>291</width>
-          <height>21</height>
+          <height>16</height>
          </rect>
         </property>
-        <layout class="QHBoxLayout" name="horizontalLayout_7">
-         <item>
-          <widget class="QLabel" name="lbDetailDepart">
-           <property name="text">
-            <string>&lt;Departure&gt;</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="label_11">
-           <property name="text">
-            <string>to</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="lbDetailArrive">
-           <property name="text">
-            <string>&lt;Arrival&gt;</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
+        <property name="text">
+         <string>&lt;Arrival&gt;</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="lbDetailDepart">
+        <property name="geometry">
+         <rect>
+          <x>320</x>
+          <y>280</y>
+          <width>291</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>&lt;Departure&gt;</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_11">
+        <property name="geometry">
+         <rect>
+          <x>320</x>
+          <y>300</y>
+          <width>16</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>to</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="btnRefresh">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>360</y>
+          <width>75</width>
+          <height>23</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Refresh</string>
+        </property>
        </widget>
       </widget>
       <widget class="QWidget" name="tabScheduling">
@@ -256,7 +275,11 @@
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout_3">
               <item>
-               <widget class="QDateEdit" name="deDate"/>
+               <widget class="QDateEdit" name="deDate">
+                <property name="displayFormat">
+                 <string>yyyy/MM/dd</string>
+                </property>
+               </widget>
               </item>
               <item>
                <spacer name="horizontalSpacer">
@@ -284,7 +307,11 @@
              <widget class="QComboBox" name="cbBandaraBerangkat"/>
             </item>
             <item>
-             <widget class="QTimeEdit" name="teJamBerangka"/>
+             <widget class="QTimeEdit" name="teJamBerangkat">
+              <property name="displayFormat">
+               <string>h:mm</string>
+              </property>
+             </widget>
             </item>
             <item>
              <widget class="QLabel" name="label_3">
@@ -297,7 +324,11 @@
              <widget class="QComboBox" name="cbBandaraDatang"/>
             </item>
             <item>
-             <widget class="QTimeEdit" name="teJamDatang"/>
+             <widget class="QTimeEdit" name="teJamDatang">
+              <property name="displayFormat">
+               <string>h:mm</string>
+              </property>
+             </widget>
             </item>
             <item>
              <widget class="QLabel" name="label_4">

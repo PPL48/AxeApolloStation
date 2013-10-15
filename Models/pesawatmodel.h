@@ -14,6 +14,7 @@ public:
     //-- operation
     QList<Pesawat>  getAllPesawat();
     QList<Pesawat>  getPesawatBy(QString criteria);
+    Pesawat         getCache(int index);
     bool            insertPesawat(Pesawat pesawat);
     bool            updatePesawat(int index, Pesawat pesawat);
     bool            refreshList();
