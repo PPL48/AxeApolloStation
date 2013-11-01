@@ -13,12 +13,24 @@
 #include "Views/dlgchoosecrew.h"
 
 #include <QMessageBox>
+#include <QDate>
+#include <QPixmap>
 
 FlightController::FlightController(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::FlightController)
 {
     ui->setupUi(this);
+
+    QPixmap pixmap;
+    if (!pixmap.load( ":Resources/logo.png" )) {
+        qWarning("Failed to load Resources/logo.png");
+    }
+    ui->label_10->setPixmap(pixmap);
+
+
+    //-- Set Tanggal Minimum (current Date)
+    ui->deDate->setMinimumDate(QDate::currentDate());
 
     //-- Get Pesawat
     QList<Pesawat> pesawat = DbFactory::getPesawatModel()->getAllPesawat();
@@ -98,11 +110,41 @@ void FlightController::on_btnLogout_clicked()
 
 void FlightController::on_btnCreate_clicked()
 {
+    int error = 0;
+
     //-- Building process
     PenerbanganModel *model = DbFactory::getPenerbanganModel();
     int idxFrom  = ui->cbBandaraBerangkat->currentIndex();
     int idxTo    = ui->cbBandaraDatang->currentIndex();
     int idxPlane = ui->cbPesawat->currentIndex();
+
+    QString qval = "id_pesawat=" + QString::number(idxPlane + 1);
+    QList<Penerbangan> res = model->getPenerbanganBy2(qval);
+    if (!res.isEmpty()){
+        //pesawat sudah pernah diassign dalam suatu penerbangan
+        Penerbangan p = res.last();
+        if (p.id_bandara_tujuan != (idxFrom + 1)){
+            //pesawat berangkat dari bandara di mana ia tidak berada sekarang
+            error = 1;
+        }
+        if (idxFrom == idxTo){
+            //pesawat berangkat dari bandara yang sama dengan bandara tujuan
+            error = 2;
+        }
+        if (ui->teJamBerangkat->time() == ui->teJamDatang->time()){
+            //pesawat berangkat dengan waktu yang sama dengan waktu sampai di tujuan
+            error = 3;
+        }
+        if (p.tanggal == ui->deDate->date().toString("yyyy/MM/dd")){
+            //pesawat berangkat pada jam di mana ia masih ada di udara
+            int arrival_hour = p.jam_tiba.left(2).toInt();
+            if (ui->teJamBerangkat->time().hour() < arrival_hour){
+                error = 4;
+            }
+        }
+    } else {
+        //pesawat belum pernah diassign dalam suatu penerbangan, kondisi apapun valid
+    }
 
     model->addJam(ui->teJamBerangkat->text(), true);
     model->addJam(ui->teJamDatang->text(), false);
@@ -121,19 +163,33 @@ void FlightController::on_btnCreate_clicked()
     model->addPesawat(DbFactory::getPesawatModel()->getCache(idxPlane));
 
     //-- Let the model build it and get the result
-    model->createPenerbangan();
+    if (error == 0){
+        model->createPenerbangan();
 
-    //-- Update the list
-    on_btnRefresh_clicked();
+        //-- Update the list
+        on_btnRefresh_clicked();
 
-    //-- Clear the data
-    ui->lvAviatorList->clear();
-    ui->lvCrewList->clear();
-    m_Aviator.clear();
-    m_Crew.clear();
+        //-- Clear the data
+        ui->lvAviatorList->clear();
+        ui->lvCrewList->clear();
+        m_Aviator.clear();
+        m_Crew.clear();
 
-    //-- Let user know
-    QMessageBox::information(this,"Success!","Penambahan jadwal sukses dilakukan");
+        //-- Let user know
+        QMessageBox::information(this,"Success!","Penambahan jadwal sukses dilakukan");
+    } else {
+        QString err_message;
+        if (error == 1){
+            err_message = "Pesawat berangkat dari bandara di mana ia tidak berada sekarang";
+        } else if (error == 2){
+            err_message = "Pesawat berangkat dari bandara yang sama dengan bandara tujuan";
+        } else if (error == 3){
+            err_message = "Pesawat berangkat pada waktu yang sama dengan waktu sampai di tujuan";
+        } else if (error == 4){
+            err_message = "Pesawat berangkat pada waktu seharusnya ia masih mengudara";
+        }
+        QMessageBox::information(this,"Failed!","Penambahan jadwal tidak dapat dilakukan\n"+err_message);
+    }
 }
 
 void FlightController::return_index(Pegawai pgw) {
