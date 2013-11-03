@@ -29,11 +29,12 @@ FlightController::FlightController(QWidget *parent) :
 
     //-- Get Bandara
     QList<Bandara> bandara = DbFactory::getBandaraModel()->getAllBandara();
-    if (pesawat.length() > 0)
+    if (pesawat.length() > 0) {
         foreach (Bandara bdr, bandara) {
             ui->cbBandaraBerangkat->addItem(bdr.toString());
             ui->cbBandaraDatang->addItem(bdr.toString());
         }
+    }
 
     //-- Get Penerbangan
     on_btnRefresh_clicked();

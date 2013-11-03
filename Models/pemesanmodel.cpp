@@ -8,12 +8,17 @@ QList<Pemesan> PemesanModel::getPemesanBy(QString criteria)
 {
     QList<Pemesan> pList;
     QSqlDatabase db = QSqlDatabase::database("ErlanggaIS");
-    QSqlQuery query(db);
-    query.exec("SELECT * FROM pemesan,pemesanan where "+criteria);
-    while(query.next()) {
-        Pemesan pemesan(query.value("id").toInt(),query.value("id_pemesanan").toInt(),query.value("nama").toString(),
-                        query.value("email").toString(),query.value("no_handphone").toString(),
-                        query.value("is_member").toInt());
+    setQuery("SELECT * FROM pemesan,pemesanan where "+criteria, db);
+
+    int length = rowCount();
+
+    for (int i=0; i < length; i++) {
+        Pemesan pemesan(record(i).value("id").toInt(),
+                        record(i).value("id_pemesanan").toInt(),
+                        record(i).value("nama").toString(),
+                        record(i).value("email").toString(),
+                        record(i).value("no_handphone").toString(),
+                        record(i).value("is_member").toInt());
         pList.push_back(pemesan);
     }
     return pList;

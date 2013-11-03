@@ -1,4 +1,5 @@
 #include "penerbangan.h"
+#include <QDebug>
 
 Penerbangan::Penerbangan(){
 

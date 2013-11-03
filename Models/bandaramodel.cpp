@@ -8,14 +8,12 @@ BandaraModel::BandaraModel(QObject *parent) : QSqlQueryModel(parent)
 QList<Bandara> BandaraModel::getAllBandara() {
     QSqlDatabase db = QSqlDatabase::database("ErlanggaIS");
     QList<Bandara> retVal;
-    retVal.clear();
 
     if (db.isOpen()) {
         QString theQuery = "SELECT * FROM bandara";
         setQuery(theQuery, db);
 
         int length = rowCount();
-        retVal.clear();
 
         for (int i=0; i<length; ++i) {
             Bandara bandara(record(i).value("id").toInt(),
@@ -32,12 +30,15 @@ QList<Bandara> BandaraModel::getBandaraBy(QString criteria)
 {
     QList<Bandara> pList;
     QSqlDatabase db = QSqlDatabase::database("ErlanggaIS");
-    QSqlQuery query(db);
-    query.exec("SELECT * FROM bandara where "+criteria);
-    while(query.next()) {
-        Bandara bandara(query.value("id").toInt(),query.value("nama").toString(),query.value("kode").toString(),
-                        query.value("biaya").toInt());
-        pList.push_back(bandara);
+
+    if (db.isOpen()) {
+        QSqlQuery query(db);
+        query.exec("SELECT * FROM bandara where "+criteria);
+        while(query.next()) {
+            Bandara bandara(query.value("id").toInt(),query.value("nama").toString(),query.value("kode").toString(),
+                            query.value("biaya").toInt());
+            pList.push_back(bandara);
+        }
     }
     return pList;
 }
