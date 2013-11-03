@@ -50,7 +50,7 @@
        <item>
         <widget class="QLabel" name="lbUsername">
          <property name="text">
-          <string>Username</string>
+          <string>timo</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>

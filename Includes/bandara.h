@@ -18,7 +18,7 @@ public:
     QString  getKode();
     int      getBiaya();
 
-private:
+//private:
     qint32   id;
     QString  nama;
     QString  kode;

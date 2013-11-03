@@ -80,6 +80,29 @@ QList<Penerbangan> PenerbanganModel::getPenerbanganBy(QString criteria) {
     return retVal;
 }
 
+QList<Penerbangan> PenerbanganModel::getPenerbanganBy2(QString criteria)
+{
+    QList<Penerbangan> pList;
+    QSqlDatabase db = QSqlDatabase::database("ErlanggaIS");
+    QSqlQuery query(db);
+    query.exec("SELECT * FROM pemesanan,penerbangan where "+criteria);
+    while(query.next()) {
+        Penerbangan penerbangan(
+						query.value("id").toInt(),
+						query.value("jam_berangkat").toString(),
+						query.value("jam_tiba").toString(),
+                        query.value("tanggal").toString(),
+						query.value("id_bandara_asal").toInt(),
+                        query.value("id_bandara_tujuan").toInt(),
+						query.value("id_pesawat").toInt(),
+						"",
+						"",
+						"");
+        pList.push_back(penerbangan);
+    }
+    return pList;
+}
+
 void PenerbanganModel::createPenerbangan() {
     //-- Penerbangan
     //----- Create SQL Query

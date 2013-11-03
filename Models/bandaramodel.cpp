@@ -28,8 +28,18 @@ QList<Bandara> BandaraModel::getAllBandara() {
     return retVal;
 }
 
-QList<Bandara> BandaraModel::getBandaraBy(QString criteria) {
-
+QList<Bandara> BandaraModel::getBandaraBy(QString criteria)
+{
+    QList<Bandara> pList;
+    QSqlDatabase db = QSqlDatabase::database("ErlanggaIS");
+    QSqlQuery query(db);
+    query.exec("SELECT * FROM bandara where "+criteria);
+    while(query.next()) {
+        Bandara bandara(query.value("id").toInt(),query.value("nama").toString(),query.value("kode").toString(),
+                        query.value("biaya").toInt());
+        pList.push_back(bandara);
+    }
+    return pList;
 }
 
 Bandara BandaraModel::getCache(int index) {
